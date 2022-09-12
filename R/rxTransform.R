@@ -1,4 +1,6 @@
 ######## rxTransform() #################
+#' Transformation of adaptive response traits
+#'
 #' @description
 #' Part of the Index for Adaptive Responses (InARes).
 #' Transforms trait values of a treatment (or similar data) in relation to a control (or similar data).
@@ -9,37 +11,55 @@
 #' This transformation is the first step of calculating the Index for Adaptive Responses, followed by
 #' the functions DIndex() and (optionally) dContribution().
 #'
-#' @param x A vector with the trait values (observations) that should be transformed. 
-#' Should have the same length as treat.
+#' @param x A vector with the trait values (observations) that should be transformed. Should have the same length as treat.
 #' @param y A vector containing the treatment for each observation. Should have the same length as trait.
-#' @param ctrl The name of the factor for your control group as to be found in treat. 
-#' This is important for standardization.
+#' @param ctrl The name of the factor for your control group as to be found in treat. This is important for standardization.
 #' @param usemc Can be either 0 (default) or 1. In case of 0, the values are standardized by the span of 
-#' treatment and control (max-min)). In case of 1, mean control is used to standardize the values. In this case, 
-#' values will be standardized for the experiment. Therefore, values are completely independent of the experimental
-#' design and other factors. This increases the comparability with other studies, regarding the original values. 
-#' However, when using this for calculation of the Index for Adaptive Responses, the weighing (dmax) of the traits 
-#' will be 1 in each case. Therefore, no real weighing takes place. This might be desired, if the InARes framework
-#' is used as plasticity index.
+#'     treatment and control (max-min)). In case of 1, mean control is used to standardize the values. In this case, 
+#'     values will be standardized for the experiment. Therefore, values are completely independent of the experimental
+#'     design and other factors. This increases the comparability with other studies, regarding the original values. 
+#'     However, when using this for calculation of the Index for Adaptive Responses, the weighing (dmax) of the traits 
+#'     will be 1 in each case. Therefore, no real weighing takes place. This might be desired, if the InARes framework
+#'     is used as plasticity index.
 #'
 #' @return Returns a vector containing the transformed data.
 #'
 #' @usage 
-#' rxTransform(x, y)
-#' rxTransform(x, y, ctrl = "control")
 #' rxTransform(x, y, ctrl = "control", usemc = 0)
 #' 
 #' @examples 
+#' # load example data
+#' library(InARes)
+#' mydata <- data.InARes
+#' 
+#' # transform one trait for calculating the Index for Adaptive Responses in a next step
+#' mydata$BL_rx <- rxTransform(x = mydata$BL,
+#'                             y = mydata$induced,
+#'                             ctrl = "n")
+#' 
+#' # transform a set of traits for calculating the Index for Adaptive Responses in a next step
+#' params <- c("BL", "SL", "BW", "BWL", "Forn", "Furca", "SBAd", "SBAv", "meansld", "meanslv")
+#' for(i in 1:length(params)){
+#'   mydata[, paste(params[i], "_rx", sep = "")] <- rxTransform(x = mydata[,params[i]],
+#'                                                              y = mydata$induced,
+#'                                                              ctrl = "n")
+#' }
+#' 
+#' # transform one trait to use it in a plasticity index
+#' mydata$BL_uw <- rxTransform(x = mydata$BL,
+#'                             y = mydata$induced,
+#'                             ctrl = "n",
+#'                             usemc = 1)
 #' 
 #' 
 #' @seealso 
-#' DIndex(), calculates a weighted mean of all rxTransformed trait values
-#' dContribution(), can be used to estmate each traits' contribution to the Index of Adaptive Responses
+#' DIndex(), calculates a weighted mean of all rxTransformed trait values.
+#' 
+#' dContribution(), can be used to estmate each traits' contribution to the Index of Adaptive Responses.
 #' 
 #' @references TODO: Link to the Publication
 #' 
 #' @export
-#' @importFrom 
 #'
 rxTransform <- function(x, y, ctrl = "control", usemc = 0){
   
