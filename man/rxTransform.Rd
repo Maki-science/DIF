@@ -4,7 +4,7 @@
 \alias{rxTransform}
 \title{Transformation of adaptive response traits}
 \usage{
-rxTransform(x, y, ctrl = "control", usemc = 0)
+rxTransform(x, y, ctrl = "control", usemc = FALSE)
 }
 \arguments{
 \item{x}{A vector with the trait values (observations) that should be transformed. Should have the same length as treat.}
@@ -13,12 +13,12 @@ rxTransform(x, y, ctrl = "control", usemc = 0)
 
 \item{ctrl}{The name of the factor for your control group as to be found in treat. This is important for standardization.}
 
-\item{usemc}{Can be either 0 (default) or 1. In case of 0, the values are standardized by the span of
-treatment and control (max-min)). In case of 1, mean control is used to standardize the values. In this case,
+\item{usemc}{Can be either FALSE (default) or TRUE. In case of FALSE, the values are standardized by the span of
+treatment and control (max-min)). In case of TRUE., mean control is used to standardize the values. In this case,
 values will be standardized for the experiment. Therefore, values are completely independent of the experimental
 design and other factors. This increases the comparability with other studies, regarding the original values.
 However, when using this for calculation of the Index for Adaptive Responses, the weighing (dmax) of the traits
-will be 1 in each case. Therefore, no real weighing takes place. This might be desired, if the InARes framework
+will be TRUE. in each case. Therefore, no real weighing takes place. This might be desired, if the InARes framework
 is used as plasticity index.}
 }
 \value{

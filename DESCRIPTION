@@ -1,23 +1,23 @@
 Package: InARes
 Title: The Framework for Calculating the Index of Adaptive Responses
-Version: 0.0.0.9000
+Version: 0.0.0.9200
 Authors@R: 
     c(person("Marvin", "Kiene", , "info@maki-science.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9981-5661")),
        person(
           "Patricia", "Diel",
           role = c("aut"),
-          comment = c(ORCID = "0000-0001-9981-5661")
+          comment = c(ORCID = "0000-0002-9786-1071")
           ),
       person(
           "Matthias", "Schott",
           role = c("aut"),
-          comment = c(ORCID = "0000-0001-9981-5661")
+          comment = c(ORCID = "0000-0002-3034-9305")
           ),
       person(
           "Dominik", "Martin-Creuzburg",
           role = c("aut"),
-          comment = c(ORCID = "0000-0001-9981-5661")
+          comment = c(ORCID = "0000-0002-4248-0730")
           ),
       person(
           "Christian", "Laforsch",
@@ -25,7 +25,6 @@ Authors@R:
           comment = c(ORCID = "0000-0001-9981-5661")
           )
       )
-Maintainer: Marvin Kiene <info@Maki-Science.org>
 Description: The framework for the Index of Adaptive Responses provides a simple and 
     fast tool to evaluate challenging data on ‘whole organism’ adaptive responses in complex environments. 
     There are some minor points or cases, where caution is recommended. To provide a powerful tool and 
@@ -42,3 +41,6 @@ RoxygenNote: 7.2.1
 Depends: 
     R (>= 2.10)
 LazyData: true
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

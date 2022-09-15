@@ -14,18 +14,18 @@
 #' @param x A vector with the trait values (observations) that should be transformed. Should have the same length as treat.
 #' @param y A vector containing the treatment for each observation. Should have the same length as trait.
 #' @param ctrl The name of the factor for your control group as to be found in treat. This is important for standardization.
-#' @param usemc Can be either 0 (default) or 1. In case of 0, the values are standardized by the span of 
-#'     treatment and control (max-min)). In case of 1, mean control is used to standardize the values. In this case, 
+#' @param usemc Can be either FALSE (default) or TRUE. In case of FALSE, the values are standardized by the span of 
+#'     treatment and control (max-min)). In case of TRUE., mean control is used to standardize the values. In this case, 
 #'     values will be standardized for the experiment. Therefore, values are completely independent of the experimental
 #'     design and other factors. This increases the comparability with other studies, regarding the original values. 
 #'     However, when using this for calculation of the Index for Adaptive Responses, the weighing (dmax) of the traits 
-#'     will be 1 in each case. Therefore, no real weighing takes place. This might be desired, if the InARes framework
+#'     will be TRUE. in each case. Therefore, no real weighing takes place. This might be desired, if the InARes framework
 #'     is used as plasticity index.
 #'
 #' @return Returns a vector containing the transformed data.
 #'
 #' @usage 
-#' rxTransform(x, y, ctrl = "control", usemc = 0)
+#' rxTransform(x, y, ctrl = "control", usemc = FALSE)
 #' 
 #' @examples 
 #' # load example data
@@ -61,7 +61,7 @@
 #' 
 #' @export
 #'
-rxTransform <- function(x, y, ctrl = "control", usemc = 0){
+rxTransform <- function(x, y, ctrl = "control", usemc = FALSE){
   
   # calculate control values mean, max, min (used later several times)
   mean_control <- mean(x[which(y == ctrl)], na.rm = T)
@@ -92,7 +92,7 @@ rxTransform <- function(x, y, ctrl = "control", usemc = 0){
     }
     
     # if data should be standardized on the experiment
-    if(usemc == 1){
+    if(usemc == TRUE){
       # get the value, with the maximum distance to control mean
       max <- max( abs( mean_control - x), na.rm = T ) + mean_control
     }
@@ -106,7 +106,7 @@ rxTransform <- function(x, y, ctrl = "control", usemc = 0){
         }
         else{
           # if data should be standardized on the experiment using the control mean
-          if(usemc == 1){
+          if(usemc == TRUE){
             tval[j] <- (x[j] - mean_control) / (max - mean_control)
           }
           else{ # if data should be transformed according to the span of control and treatment
