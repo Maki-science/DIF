@@ -32,7 +32,7 @@ Description: The framework for the Index of Adaptive Responses provides a simple
     that can occur, when applying the framework. The list is provided in the publication but will also be 
     regularly updated and extended in the R package and its web page, to keep track on potential future 
     extensions and occurring issues during the broad applications in various research fields. 
-URL: TODO: add URL of package page
+URL: https://github.com/Maki-science/InARes
 BugReports: https://github.com/Maki-science/InARes/issues
 License: CC BY 4.0
 Encoding: UTF-8

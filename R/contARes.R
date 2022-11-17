@@ -46,6 +46,53 @@
 #' @return Returns a list containing the contribution of each trait. For each
 #'         treatment a separate data frame is created and stored within the list.
 #'         Furthermore, an automated, qualitative interpretation is provided.
+#'         
+#' @usage contARes(data, 
+#'                 params, 
+#'                 InAResCol, 
+#'                 treatCol = "treatment", 
+#'                 ctrl = "control", 
+#'                 th.change = 0.05, 
+#'                 th.sd = 0.5)
+#'         
+#' @examples
+#' # load example data
+#' library(InARes)
+#' mydata <- data.InARes
+#' 
+#' # first transform trait values with Trex
+#' params <- c("BL", "SL", "BW", "BWL", "Forn", "Furca", "SBAd", "SBAv", "meansld", "meanslv")
+#' for(i in 1:length(params)){
+#'   mydata[, paste(params[i], "_rex", sep = "")] <- Trex(x = mydata[,params[i]],
+#'                                                        y = mydata$induced,
+#'                                                        ctrl = "n")
+#' }
+#' 
+#' # calculate the InARes in its default form (without a priori knowledge)
+#' results <- InARes(data = mydata,
+#'                   traits = c("BL_rex", "SL_rex", "BW_rex", "BWL_rex", "Forn_rex", 
+#'                              "Furca_rex", "SBAd_rex", "SBAv_rex", "meansld_rex", "meanslv_rex"),
+#'                   treatCol = "induced",
+#'                   ctrl = "n")
+#' # results contains two parts: index and rexmax                 
+#' # InARes contains a vector with the calculated values
+#' mydata$InARes <- results$index
+#' 
+#' # calculate each trait's contribution to the index
+#' contARes(data = mydata, 
+#'          params = c("BL_rex", "SL_rex", "BW_rex", "BWL_rex", "Forn_rex", 
+#'                     "Furca_rex", "SBAd_rex", "SBAv_rex", "meansld_rex", "meanslv_rex"),
+#'          InAResCol = "InARes",
+#'          treatCol = "induced",
+#'          ctrl = "n")
+#' # results are provided numerically and as plain text
+#' 
+#' @seealso 
+#' InARes(), calculates a weighted mean of all rex transformed trait values.
+#' 
+#' Trex(), transforms trait values to a relative expression value.
+#' 
+#' @references TODO: Link to the Publication         
 #'
 #' @export
 #' @importFrom stats sd

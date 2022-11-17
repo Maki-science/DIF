@@ -1,5 +1,5 @@
 ######## Trex() #################
-#' Transformation of relative expression
+#' Transformation to relative expression of traits
 #'
 #' @description
 #' Part of the Index for Adaptive Responses (InARes).
@@ -55,7 +55,7 @@
 #' @seealso 
 #' InARes(), calculates a weighted mean of all rex transformed trait values.
 #' 
-#' dContribution(), can be used to estmate each traits' contribution to the Index of Adaptive Responses.
+#' contARes(), can be used to estmate each traits' contribution to the Index of Adaptive Responses.
 #' 
 #' @references TODO: Link to the Publication
 #' 

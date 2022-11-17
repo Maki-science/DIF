@@ -2,7 +2,7 @@
 % Please edit documentation in R/Trex.R
 \name{Trex}
 \alias{Trex}
-\title{Transformation of relative expression}
+\title{Transformation to relative expression of traits}
 \usage{
 Trex(x, y, ctrl = "control", usemc = FALSE)
 }
@@ -66,5 +66,5 @@ TODO: Link to the Publication
 \seealso{
 InARes(), calculates a weighted mean of all rex transformed trait values.
 
-dContribution(), can be used to estmate each traits' contribution to the Index of Adaptive Responses.
+contARes(), can be used to estmate each traits' contribution to the Index of Adaptive Responses.
 }

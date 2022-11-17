@@ -4,18 +4,16 @@
 \alias{InARes}
 \title{Calculation of the Index for Adaptive Responses}
 \usage{
-InARes(
-  data,
-  traits = FALSE,
-  traits.mal = FALSE,
-  treatCol = "treatment",
-  ctrl = "control",
-  as.defined = FALSE,
-  rexmax.adapt = FALSE,
-  rexmax.mal = FALSE,
-  na.action = "keep",
-  as.PI = FALSE
-)
+InARes(data, 
+       traits = FALSE, 
+       traits.mal = FALSE, 
+       treatCol = "treatment", 
+       ctrl = "control", 
+       as.defined = FALSE, 
+       rexmax.adapt = FALSE, 
+       rexmax.mal = FALSE, 
+       na.action = "keep", 
+       as.PI = FALSE)
 }
 \arguments{
 \item{data}{A data.frame to be used, which contains the rex transformed values of all traits that should be included.}
@@ -75,4 +73,55 @@ The (-1) is only necessary, if we believe that the increase of one trait is mala
 rexmax will be 1 when usemc = 1 was selected in rex transformation.
 At the current state, everything that is not control is considered as one treatment. If there are several
 treatments in the data set, we recommend to subset the data accordingly.
+}
+\examples{
+# load example data
+library(InARes)
+mydata <- data.InARes
+
+# first transform trait values with Trex
+params <- c("BL", "SL", "BW", "BWL", "Forn", "Furca", "SBAd", "SBAv", "meansld", "meanslv")
+for(i in 1:length(params)){
+  mydata[, paste(params[i], "_rex", sep = "")] <- Trex(x = mydata[,params[i]],
+                                                       y = mydata$induced,
+                                                       ctrl = "n")
+}
+
+# calculate the InARes in its default form (without a priori knowledge)
+results <- InARes(data = mydata,
+                  traits = c("BL_rex", "SL_rex", "BW_rex", "BWL_rex", "Forn_rex", 
+                             "Furca_rex", "SBAd_rex", "SBAv_rex", "meansld_rex", "meanslv_rex"),
+                  treatCol = "induced",
+                  ctrl = "n")
+# results contains two parts: index and rexmax                 
+# InARes contains a vector with the calculated values
+mydata$InARes <- results$index
+# and rexmax with the values for maximal expression
+results$rexmax
+
+# calculate the InARes with adaptive and maladaptive traits, where both are known to be that
+results <- InARes(data = mydata,
+                  traits = c("BWL_rex", "Forn_rex", "Furca_rex", "SBAd_rex", "SBAv_rex", 
+                             "meansld_rex", "meanslv_rex"),
+                  traits.mal = c("BL_rex", "SL_rex", "BW_rex"),
+                  treatCol = "induced",
+                  ctrl = "n",
+                  as.defined = TRUE)
+                  
+# calculate the InARes with rexmax values from literature or preliminary experiments
+results <- InARes(data = mydata,
+                  traits = c("BL_rex", "SL_rex", "BW_rex", "BWL_rex", "Forn_rex", 
+                             "Furca_rex", "SBAd_rex", "SBAv_rex", "meansld_rex", "meanslv_rex"),
+                  rexmax.adapt = c(-0.6, 0.8, 0.7, -0.8, 0.6, 0.6, 0.6, 0.5, 0.7, 0.8),
+                  treatCol = "induced",
+                  ctrl = "n")
+                  
+}
+\references{
+TODO: Link to the Publication
+}
+\seealso{
+Trex(), transforms trait values to a relative expression value.
+
+contARes(), can be used to estmate each traits' contribution to the Index of Adaptive Responses.
 }
