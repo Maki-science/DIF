@@ -50,6 +50,7 @@
 #' @return Returns a list containing the transformed data and additional information like rexmax.
 #'
 #' @export
+#' @importFrom stats median
 #'
 InARes <- function(data, traits = FALSE, traits.mal = FALSE, treatCol = "treatment", ctrl = "control", as.defined = FALSE, rexmax.adapt = FALSE, rexmax.mal = FALSE, na.action = "keep", as.PI = FALSE){
   
@@ -74,13 +75,13 @@ InARes <- function(data, traits = FALSE, traits.mal = FALSE, treatCol = "treatme
   
   # all parameters
   suppressWarnings(
-    if(traits.mal != FALSE && traits != FALSE){
+    if(traits.mal[1] != FALSE && traits[1] != FALSE){
       params <- c(traits, traits.mal)
     }
-    else if(traits == FALSE && traits.mal != FALSE){
+    else if(traits[1] == FALSE && traits.mal[1] != FALSE){
       params <- c(traits.mal)
     }
-    else if(traits != FALSE && traits.mal == FALSE){
+    else if(traits[1] != FALSE && traits.mal[1] == FALSE){
       params <- traits
     }
     else{
@@ -103,10 +104,10 @@ InARes <- function(data, traits = FALSE, traits.mal = FALSE, treatCol = "treatme
     if(as.defined == TRUE){ # if as.defined == TRUE use the sign as defined (positive for traits,
       # and negative for traits.mal)
       suppressWarnings(
-      if(traits != FALSE){
+      if(traits[1] != FALSE){
         for(j in 1:length(traits)){
           # use rexmax as defined (adaptive or maladaptive) - a description of rexmax is given further below
-          if(rexmax.adapt != FALSE && is.na(rexmax.adapt[j]) == FALSE){
+          if(rexmax.adapt[1] != FALSE && is.na(rexmax.adapt[j]) == FALSE){
             #if rexmax are set (e.g. from literature), insert into this df
             rexmax <- rexmax.adapt[j]
           }
@@ -146,9 +147,9 @@ InARes <- function(data, traits = FALSE, traits.mal = FALSE, treatCol = "treatme
       
       singleDs_mal <- c()
       suppressWarnings(
-        if(traits.mal != FALSE){
+        if(traits.mal[1] != FALSE){
           for(j in 1:length(traits.mal)){
-            if(rexmax.mal != FALSE && is.na(rexmax.mal[j]) == FALSE){
+            if(rexmax.mal[1] != FALSE && is.na(rexmax.mal[j]) == FALSE){
               rexmax <- rexmax.mal[j]
             }
             else{
@@ -183,11 +184,11 @@ InARes <- function(data, traits = FALSE, traits.mal = FALSE, treatCol = "treatme
       # intended. It implies, that traits, that are exhibited strongly negative (considering d) in some cases or
       # have a very high variance in its expression are supposed to be less important.
       suppressWarnings(
-      if(traits != FALSE){
+      if(traits[1] != FALSE){
         for(j in 1:length(traits)){
           
           # in this case we select rexmax as before, but we will keep the sign (-/+) of the treatments median
-          if(rexmax.adapt != FALSE && is.na(rexmax.adapt[j]) == FALSE){
+          if(rexmax.adapt[1] != FALSE && is.na(rexmax.adapt[j]) == FALSE){
             rexmax <- rexmax.adapt[j]
           }
           else{
@@ -216,9 +217,9 @@ InARes <- function(data, traits = FALSE, traits.mal = FALSE, treatCol = "treatme
       
       singleDs_mal <- c()
       suppressWarnings(
-        if(traits.mal != FALSE){
+        if(traits.mal[1] != FALSE){
           for(j in 1:length(traits.mal)){
-            if(rexmax.mal != FALSE && is.na(rexmax.mal[j]) == FALSE){
+            if(rexmax.mal[1] != FALSE && is.na(rexmax.mal[j]) == FALSE){
               rexmax <- rexmax.mal[j]
             }
             else{
@@ -248,7 +249,7 @@ InARes <- function(data, traits = FALSE, traits.mal = FALSE, treatCol = "treatme
       # check how to deal with NAs (read head for detail)
       # ignore NAs
       if(na.action == "omit"){
-        if(traits.mal != FALSE){
+        if(traits.mal[1] != FALSE){
           nNAs <- sum(is.na(singleDs_adapt), is.na(singleDs_mal)) # if there were NA in one trait of the row, still calculate but reduce the number of traits
           D[i] <- sum(singleDs_adapt, singleDs_mal, na.rm = T) / ( length(traits) + length(traits.mal) - nNAs)
         }
@@ -261,7 +262,7 @@ InARes <- function(data, traits = FALSE, traits.mal = FALSE, treatCol = "treatme
       # keep NAs -> DI will be NA
       # the interpolation takes place, above when singleDs are calculated
       else if(na.action == "keep"|| na.action == "interpolate"){
-        if(traits.mal != FALSE){
+        if(traits.mal[1] != FALSE){
           nNAs <- sum(is.na(singleDs_adapt), is.na(singleDs_mal)) # if there were NA in one trait of the row, still calculate but reduce the number of traits
           if(nNAs == 0){
             D[i] <- sum(singleDs_adapt, singleDs_mal, na.rm = T) / ( length(traits) + length(traits.mal) )
