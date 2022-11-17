@@ -1,6 +1,6 @@
 Package: InARes
 Title: The Framework for Calculating the Index of Adaptive Responses
-Version: 0.0.0.9200
+Version: 0.0.0.9300
 Authors@R: 
     c(person("Marvin", "Kiene", , "info@maki-science.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9981-5661")),
