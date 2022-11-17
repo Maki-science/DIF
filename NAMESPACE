@@ -2,4 +2,6 @@
 
 export(InARes)
 export(Trex)
+export(contARes)
 importFrom(stats,median)
+importFrom(stats,sd)

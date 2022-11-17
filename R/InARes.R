@@ -72,6 +72,18 @@ InARes <- function(data, traits = FALSE, traits.mal = FALSE, treatCol = "treatme
     }
   }
   
+  # check whether the vectors of rexmax and traits are equally long if they are set.
+  if(traits[1] != FALSE && rexmax.adapt[1] != FALSE){
+    if(length(traits) != length(rexmax.adapt)){
+      stop("Length of traits is unequal to length rexmax.adapt. Please recheck your input.")
+    }
+  }
+  if(traits.mal[1] != FALSE && rexmax.mal[1] != FALSE){
+    if(length(traits.mal) != length(rexmax.mal)){
+      stop("Length of traits.mal is unequal to length rexmax.mal. Please recheck your input.")
+    }
+  }
+  
   
   # all parameters
   suppressWarnings(
