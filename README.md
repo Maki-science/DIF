@@ -4,6 +4,7 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/InARes)](https://CRAN.R-project.org/package=InARes)
 [![R-CMD-check](https://github.com/Maki-science/InARes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Maki-science/InARes/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/Maki-science/InARes/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Maki-science/InARes?branch=main)
+[![test-coverage](https://github.com/Maki-science/InARes/actions/workflows/test-coverage.yaml/badge.svg?event=check_run)](https://github.com/Maki-science/InARes/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
 # InARes
