@@ -1,15 +1,15 @@
-######## rxTransform() #################
-#' Transformation of adaptive response traits
+######## Trex() #################
+#' Transformation of relative expression
 #'
 #' @description
 #' Part of the Index for Adaptive Responses (InARes).
 #' Transforms trait values of a treatment (or similar data) in relation to a control (or similar data).
-#' This results in transformed values that reflect the relative expression (therefore rx) of a trait of 
+#' This results in transformed values that reflect the relative expression (therefore rex) of a trait of 
 #' a treated organism in relation to a control organism. They are standardized and normalized.
 #' The transformation is calculated as:
 #' (value - mean of control values) / (max - min of the control and value treatments)
 #' This transformation is the first step of calculating the Index for Adaptive Responses, followed by
-#' the functions DIndex() and (optionally) dContribution().
+#' the functions InARes() and (optionally) dContribution().
 #'
 #' @param x A vector with the trait values (observations) that should be transformed. Should have the same length as treat.
 #' @param y A vector containing the treatment for each observation. Should have the same length as trait.
@@ -25,7 +25,7 @@
 #' @return Returns a vector containing the transformed data.
 #'
 #' @usage 
-#' rxTransform(x, y, ctrl = "control", usemc = FALSE)
+#' Trex(x, y, ctrl = "control", usemc = FALSE)
 #' 
 #' @examples 
 #' # load example data
@@ -33,27 +33,27 @@
 #' mydata <- data.InARes
 #' 
 #' # transform one trait for calculating the Index for Adaptive Responses in a next step
-#' mydata$BL_rx <- rxTransform(x = mydata$BL,
-#'                             y = mydata$induced,
-#'                             ctrl = "n")
+#' mydata$BL_rex <- Trex(x = mydata$BL,
+#'                       y = mydata$induced,
+#'                       ctrl = "n")
 #' 
 #' # transform a set of traits for calculating the Index for Adaptive Responses in a next step
 #' params <- c("BL", "SL", "BW", "BWL", "Forn", "Furca", "SBAd", "SBAv", "meansld", "meanslv")
 #' for(i in 1:length(params)){
-#'   mydata[, paste(params[i], "_rx", sep = "")] <- rxTransform(x = mydata[,params[i]],
-#'                                                              y = mydata$induced,
-#'                                                              ctrl = "n")
+#'   mydata[, paste(params[i], "_rex", sep = "")] <- Trex(x = mydata[,params[i]],
+#'                                                        y = mydata$induced,
+#'                                                        ctrl = "n")
 #' }
 #' 
 #' # transform one trait to use it in a plasticity index
-#' mydata$BL_uw <- rxTransform(x = mydata$BL,
-#'                             y = mydata$induced,
-#'                             ctrl = "n",
-#'                             usemc = 1)
+#' mydata$BL_uw <- Trex(x = mydata$BL,
+#'                      y = mydata$induced,
+#'                      ctrl = "n",
+#'                      usemc = 1)
 #' 
 #' 
 #' @seealso 
-#' DIndex(), calculates a weighted mean of all rxTransformed trait values.
+#' InARes(), calculates a weighted mean of all rex transformed trait values.
 #' 
 #' dContribution(), can be used to estmate each traits' contribution to the Index of Adaptive Responses.
 #' 
@@ -61,7 +61,7 @@
 #' 
 #' @export
 #'
-rxTransform <- function(x, y, ctrl = "control", usemc = FALSE){
+Trex <- function(x, y, ctrl = "control", usemc = FALSE){
   
   # calculate control values mean, max, min (used later several times)
   mean_control <- mean(x[which(y == ctrl)], na.rm = T)

@@ -7,7 +7,13 @@
 [![Codecov test coverage](https://codecov.io/gh/Maki-science/InARes/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Maki-science/InARes?branch=main)
 <!-- badges: end -->
 
-The goal of InARes is to ...
+The framework for the Index of Adaptive Responses provides a simple and 
+    fast tool to evaluate challenging data on ‘whole organism’ adaptive responses in complex environments. 
+    There are some minor points or cases, where caution is recommended. To provide a powerful tool and 
+    high confidence in its utilization, I provided an additional list of recommendations and potential issues 
+    that can occur, when applying the framework. The list is provided in the publication but will also be 
+    regularly updated and extended in the R package and its web page, to keep track on potential future 
+    extensions and occurring issues during the broad applications in various research fields. 
 
 ## Installation
 
