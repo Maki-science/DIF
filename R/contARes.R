@@ -148,7 +148,7 @@ contARes <- function(data, params, InAResCol, treatCol = "treatment", ctrl = "co
         dcontr$contributionChange[o] >= th.change && 
         abs(dcontr$contrSDT[o] / dcontr$meancontrT[o]) >= th.sd
       ){
-        obj[[paste(treats[n], "summary", dcontr$trait[o], sep=".")]] <- "An increase in this trait seem to be adaptive. However, there might be interactions with other traits."
+        obj[[paste(treats[n], "summary", dcontr$trait[o], sep=".")]] <- "An increase in this trait seem to be adaptive. However, there might be interactions with other traits or (environmental) parameters."
       }
       else if(
         dcontr$contributionChange[o] >= th.change && 
@@ -160,7 +160,7 @@ contARes <- function(data, params, InAResCol, treatCol = "treatment", ctrl = "co
         dcontr$contributionChange[o] <= -th.change && 
         abs(dcontr$contrSDT[o] / dcontr$meancontrT[o]) >= th.sd
       ){
-        obj[[paste(treats[n], "summary", dcontr$trait[o], sep=".")]] <- "An increase in this trait seem to be maladaptative. However, there might be interactions with other traits."
+        obj[[paste(treats[n], "summary", dcontr$trait[o], sep=".")]] <- "An increase in this trait seem to be maladaptative. However, there might be interactions with other traits or (environmental) parameters."
       }
       else if(
         dcontr$contributionChange[o] <= -th.change && 
@@ -171,7 +171,7 @@ contARes <- function(data, params, InAResCol, treatCol = "treatment", ctrl = "co
       else if(
         abs(dcontr$contrSDT[o] / dcontr$meancontrT[o]) >= th.sd
       ){
-        obj[[paste(treats[n], "summary", dcontr$trait[o], sep=".")]] <- "This trait is indefinite in its change in contribution. There might be an interaction with other traits."
+        obj[[paste(treats[n], "summary", dcontr$trait[o], sep=".")]] <- "This trait is indefinite in its change in contribution. There might be an interaction with other traits or (environmental) parameters."
       }
       else{
         obj[[paste(treats[n], "summary", dcontr$trait[o], sep=".")]] <- "There seem no (mal-)adaptive function in this trait."

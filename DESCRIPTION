@@ -25,10 +25,10 @@ Authors@R:
           comment = c(ORCID = "0000-0001-9981-5661")
           )
       )
-Description: The framework for the Index of Adaptive Responses provides a simple and 
-    fast tool to evaluate challenging data on ‘whole organism’ adaptive responses in complex environments. 
+Description: The framework for the Index of Adaptive Responses provides a simple, fast and 
+    powerful tool to evaluate challenging data on ‘whole organism’ (multi-trait) adaptive responses in complex environments. 
     There are some minor points or cases, where caution is recommended. To provide a powerful tool and 
-    high confidence in its utilization, I provided an additional list of recommendations and potential issues 
+    high confidence in its utilization, we provided an additional list of recommendations and potential issues 
     that can occur, when applying the framework. The list is provided in the publication but will also be 
     regularly updated and extended in the R package and its web page, to keep track on potential future 
     extensions and occurring issues during the broad applications in various research fields. 

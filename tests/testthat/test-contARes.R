@@ -30,11 +30,11 @@ test_that("contARes works with high thresholds", {
 }) # inititally passing
 
 
-# test.contr.thchangedhigh <- contARes(data = test.data,
+# test.contr.thchangedlow <- contARes(data = test.data,
 #                                     params = c("BL_rx", "BW_rx", "BWL_rx", "SL_rx", "Forn_rx", "Furca_rx", "meansld_rx", "meanslv_rx", "SBAd_rx", "SBAv_rx"),
 #                                     InAResCol = "AR",
 #                                     treatCol = "induced",
 #                                     ctrl = "n",
-#                                     th.change = 0.5,
-#                                     th.sd = 1)
+#                                     th.change = 0.01,
+#                                     th.sd = 0.01)
 # usethis::use_data(test.contr.default, test.data, test.contr.thchangedlow, test.contr.thchangedhigh, internal = TRUE, overwrite = TRUE)
